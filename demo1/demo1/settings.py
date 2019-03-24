@@ -45,8 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    'users.apps.UsersConfig',  # 注册子应用
     # 子应用可以注册也可以不注册
+    'users.apps.UsersConfig',  # 注册子应用
+    'request_response.apps.RequestResponseConfig'
+    
 ]
 
 # 中间件 MIDDLEWARE, 类似于flask中的请求钩子, 处理请求/响应之外的重复性操作
@@ -144,3 +146,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static_files'),
     os.path.join(BASE_DIR, 'static_files/test'),
 ]
+
+# 提示form的action地址最后不是/结尾的,APPEND_SLASH的值默认是 Ture
+# APPEND_SLASH = False
