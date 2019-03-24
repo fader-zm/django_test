@@ -149,3 +149,17 @@ STATICFILES_DIRS = [
 
 # 提示form的action地址最后不是/结尾的,APPEND_SLASH的值默认是 Ture
 # APPEND_SLASH = False
+
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+# session 的存储方式
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_CACHE_ALIAS = "default"

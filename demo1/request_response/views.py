@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponse, JsonResponse
 # Create your views here.
 
@@ -86,7 +86,58 @@ def response_demo(request):
 
 def response_json(request):
     """响应json数据"""
+
+    # 如果响应的json数据不是字典面是列表 要么 多指定safe=False 或者把列表包装成字典格式
     json_data = [{"name": "zs", "age": 18}, "haha"]
     dict = {"dict": json_data}
     return JsonResponse(dict)
+
+
+# GET /redirect_demo/
+def reverse_demo(request):
+    """反向解析"""
+    # if 判断当前是不是登录用户,如果是 返回用户中心界面数据
+    #     else:
+
+    # print(reverse('index')) # /json_response_demo_xxxx/  没有设置命名空间时,可以用路由别名进行反向解析,它是全局查找
+    # 如果设置了命名空间后,那么这个子应用中进行反向解析时 写法 (命名空间:路由别名)
+    # reverse : 反向解析, 传入的参数必须是视图的别名
+    print(reverse('request_response:response_json'))
+    return HttpResponse("reverse_demo")
+
+
+# GET /redirect_demo/
+def redirect_demo(request):
+    """重定向"""
+    # /redirect_demo/reverse_demo/ 在路由最前面加/ 代表从根路由进行重定向,如果没有加/ 那么就是从当前路由拼接后面的路由再进行定向
+    # return redirect('reverse_demo/')
+    # return redirect('/reverse_demo/')
+    return redirect(reverse('request_response:response_json'))
+    
+
+# GET /cookice_demo/
+def cookice_demo(request):
+    """cookice读写操作"""
+    # cookice 在response对象上设置, request对象读取
+    response = HttpResponse("ok")
+    response.set_cookie("name", "zs", max_age=3600)  # 设置 cookice
+    # response.delete_cookie("name")  # 删除 cookice
+    print(request.COOKIES.get("name"))  # None ... zs
+    return response
+
+
+# GET /session_demo/
+def session_demo(request):
+    """session 读写操作"""
+    # session依赖于cookice
+    # 当代码执行到这行时, 会将session设置到redis数据库中
+    # 同时, redis数据库会生成一个session_id, 把session_id 通过后期的响应对象设置到浏览器的cookice中
+    # session通过 request请求对象来设置
+    request.session['name'] = 'zhangsan'  # 设置session
+    
+    # 先通过请求对象读取到cookice中的session_id, 然后在通过session_id读取到redis数据库中的session记录
+    # 在通过name key获取value
+    print(request.session.get('name'))  # 读取session
+    return HttpResponse("session_demo")
+    
 

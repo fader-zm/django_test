@@ -3,7 +3,8 @@ from django.conf.urls import url
 from . import views
 
 
-urlpatterns = {
+# 注意: urlpatterns是[] 不是 {}
+urlpatterns = [
     # url(r'^weather/$', views.weather)
     
     # url(r'weather/beijing/2018', views.weather)
@@ -29,5 +30,18 @@ urlpatterns = {
     url(r'^response_demo/$', views.response_demo),
     
     # 响应json 数据
-    url(r'^response_json/$', views.response_json),
-}
+    url(r'^response_json/$', views.response_json,  name="response_json"),
+    # url(r'^response_json/$', views.response_json),
+    
+    # 反向解析 reverse, 传入的参数是
+    url(r'^reverse_demo/$', views.reverse_demo),
+    
+    # 重定向
+    url(r'^redirect_demo/$', views.redirect_demo),
+    
+    # cokice 的读写操作
+    url(r'^cookice_demo/$', views.cookice_demo),
+    
+    # session 的读写操作
+    url(r'^session_demo/$', views.session_demo),
+]
