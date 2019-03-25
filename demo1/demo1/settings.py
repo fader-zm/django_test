@@ -53,6 +53,9 @@ INSTALLED_APPS = [
 ]
 
 # 中间件 MIDDLEWARE, 类似于flask中的请求钩子, 处理请求/响应之外的重复性操作
+# 在Django使用中间件,最主要监听 请求处理前  响应
+# 请求在被处理之前 所有的中间件是自上而下去执行
+# 当请求被处理之后在响应时, 所有中间件的执行顺序是自下而上
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -61,6 +64,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'middleware.my_middleware',  # 注册中间件
+    'middleware.my_middleware2',  # 注册中间件
 ]
 
 # 工程配置的路由入口文件
