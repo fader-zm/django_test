@@ -29,5 +29,6 @@ urlpatterns = [
     # url(r'^users/index/$', views.index)
     # 1. 把子应用中的所有路由都注册在总路由/根路由中
     url(r'^', include('users.urls')),
-    url(r'^', include('request_response.urls', namespace='request_response'))
+    url(r'^', include('request_response.urls', namespace='request_response')),
+    url(r'^', include('classview.urls')),
 ]

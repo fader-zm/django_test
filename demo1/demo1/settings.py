@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     
     # 子应用可以注册也可以不注册
     'users.apps.UsersConfig',  # 注册子应用
-    'request_response.apps.RequestResponseConfig'
+    'request_response.apps.RequestResponseConfig',
+    'classview.apps.ClassviewConfig',
     
 ]
 
