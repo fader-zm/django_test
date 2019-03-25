@@ -70,7 +70,7 @@ ROOT_URLCONF = 'demo1.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # 指定模板文件 加载路径
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

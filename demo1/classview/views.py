@@ -3,7 +3,12 @@ from django.views import View
 from django.http import HttpResponse
 from django.utils.decorators import method_decorator
 
+
 # Create your views here.
+"""
+类视图必须继承View
+类视图中的方法名都必须是请求方法名小写
+"""
 
 
 def my_decorator(view_fun):
@@ -35,6 +40,18 @@ class DemoView(View):
 # __import__()  # 动态导包
 
 
-
+class TemplateDemo(View):
+    """演示模板使用"""
+    # 配置模板文件路径至 settings文件中
+    # render(请求对象, 加载模板文件名, 上下文数据)
+    # 传入到模板中进行渲染的上下文数据必须是以字典的格式传入
+    def get(self, request):
+        context = {
+            'name': 'zs',
+            'age': 18,
+            'hobby': 'swimming',
+            'adict': {'age': 20, 'name': 'zhangsan', 'alist': [10, 20, 30]},
+        }
+        return render(request, "index.html", context=context)
 
 
