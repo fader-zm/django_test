@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',  # 注册子应用
     'request_response.apps.RequestResponseConfig',
     'classview.apps.ClassviewConfig',
+    'booktest.apps.BooktestConfig',
     
 ]
 
