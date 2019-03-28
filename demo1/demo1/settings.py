@@ -139,10 +139,12 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
 # 工程语言, 默认是英文, 可以修改为简体中文, zh-hans
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
 # 时区 默认是世界时间, 可以修改为亚洲/上海时区 Asia/shanghai
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 

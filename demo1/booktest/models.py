@@ -10,7 +10,10 @@ class BookInfo(models.Model):
     bread = models.IntegerField(default=0, verbose_name='阅读量')
     bcomment = models.IntegerField(default=0, verbose_name='评论量')
     is_delete = models.BooleanField(default=False, verbose_name='逻辑删除')
-
+    # 如果模型已经迁移建表,并且表中已经有数据了,那么后添加的新字段必须可以为空或给了默认值,不然迁移报错
+    # upload_to 表示上传的图片文件存储到MEDIA_ROOT指定目录中的book
+    image = models.ImageField(verbose_name='图书', null=True, upload_to='book')
+    
     class Meta:
         db_table = 'tb_books'  # 指明数据库表名
         verbose_name = '图书'  # 在admin站点中显示的名称

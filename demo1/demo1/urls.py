@@ -31,4 +31,5 @@ urlpatterns = [
     url(r'^', include('users.urls')),
     url(r'^', include('request_response.urls', namespace='request_response')),
     url(r'^', include('classview.urls')),
+    url(r'^', include('booktest.urls')),
 ]
