@@ -5,7 +5,7 @@ from rest_framework.viewsets import ModelViewSet
 import json
 
 from booktest.models import BookInfo, HeroInfo
-from booktest.serializers import BookInfoSerializers
+# from booktest.serializers import BookInfoSerializers
 
 # 使用Django开发REST接口
 
@@ -137,20 +137,64 @@ class BookDetailView(View):
         # book.save()
         # 响应时不需要有响应体, 但要指定状态码 204
         return HttpResponse(status=204)
-        
-
-class BookInfoViewSet(ModelViewSet):
-    """定义视图集"""
-    # 指定查询集
-    queryset = BookInfo.objects.all()
-    # 指定序列化器
-    serializer_class = BookInfoSerializers
 
 
+# class BookInfoViewSet(ModelViewSet):
+#     """定义视图集"""
+#     # 指定查询集
+#     queryset = BookInfo.objects.all()
+#
+#     # 指定序列化器
+#     serializer_class = BookInfoSerializer
 
 
+# from booktest.serializers import BookInfoSerializer, HeroInfoSerializer
+# from booktest.models import BookInfo, HeroInfo
+
+# book = BookInfo.objects.get(id=1)
+# s = BookInfoSerializer(instance=book)  # 创建序列化器对象,并序列化
+# s.data   # 获取序列化后的数据
+#
+# qs = BookInfo.objects.all()
+# s1 = BookInfoSerializer(instance=qs, many=True)
+# s1.data
+"""
+[
+{},
+{},
+]
+
+序列化单个heroinfo 将它关联的英雄也序列化出来
+"""
+
+# hero = HeroInfo.objects.get(id=1)
+# serializer = HeroInfoSerializer(instance=hero)
+# serializer.data
+
+# data = {
+#     'btitle': '三国',
+#     'bpub_date': '1991-11-11'
+# }
+# serializer = BookInfoSerializer(data=data)
+# serializer.is_valid()  # 调用序列化器的校验方法 True或False
+# serializer.is_valid(raise_exception=True)  # raise_exception=True如果多指定这个 将来校验出错后,会自动抛出错误信息
+# serializer.errors  # 获取校验的错误信息
+# serializer.validated_data  # 获取反序列化校验后的数据还是字典
+#
+# # 如果校验成功
+# book = serializer.save()  # 当调用序列化器的save方法时,会执行序列化器中的create方法或update方法
 
 
-
-
-
+# def save(self, **kwargs):
+#     if self.instance is not None:
+#         self.instance = self.update(self.instance, validated_data)
+#         assert self.instance is not None, (
+#             '`update()` did not return an object instance.'
+#         )
+#     else:
+#         self.instance = self.create(validated_data)
+#         assert self.instance is not None, (
+#             '`create()` did not return an object instance.'
+#         )
+#
+#     return self.instance
