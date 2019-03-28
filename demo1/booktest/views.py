@@ -1,9 +1,11 @@
 from django.http import JsonResponse, HttpResponse
 from django.views import View
+from rest_framework.viewsets import ModelViewSet
 
 import json
 
 from booktest.models import BookInfo, HeroInfo
+from booktest.serializers import BookInfoSerializers
 
 # 使用Django开发REST接口
 
@@ -137,8 +139,12 @@ class BookDetailView(View):
         return HttpResponse(status=204)
         
 
-
-
+class BookInfoViewSet(ModelViewSet):
+    """定义视图集"""
+    # 指定查询集
+    queryset = BookInfo.objects.all()
+    # 指定序列化器
+    serializer_class = BookInfoSerializers
 
 
 
